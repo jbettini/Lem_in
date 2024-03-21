@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 04:21:39 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/21 17:33:18 by jbettini         ###   ########.fr       */
+/*   Created: 2024/03/21 17:29:37 by jbettini          #+#    #+#             */
+/*   Updated: 2024/03/21 17:32:54 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemIn.h"
 
-int main (int ac, char **av) {
-    if (ac != 2)
-        return invalidNumOfArg();
-    
-    return 0;
+int    invalidNumOfArg(void){
+    ft_putstr("Invalid number of argument\n");
+    return ERROR;
 }
+
+
+

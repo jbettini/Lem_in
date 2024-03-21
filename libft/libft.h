@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -33,6 +34,7 @@ typedef struct s_list
 #  define BUFFER_SIZE	1
 # endif
 
+# define ERROR 1
 # define TRUE 1
 # define FALSE 0
 
