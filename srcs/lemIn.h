@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:22:29 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/21 17:55:52 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:29:49 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,18 @@ typedef struct  s_graph
 
 typedef struct  s_simulation
 {
-    t_graph graph;
+    t_graph *graph;
     int     ants;
     
 }               t_simulation;
 
-
+//error.c
 int    invalidNumOfArg(void);
+
+//parse.c
+t_simulation    *parseStdin(void);
+
+//init.c
+t_simulation    *getEmptySimulation(void);
 
 #endif

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 04:21:39 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/21 19:28:07 by jbettini         ###   ########.fr       */
+/*   Created: 2024/03/21 19:17:50 by jbettini          #+#    #+#             */
+/*   Updated: 2024/03/21 19:55:27 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemIn.h"
 
-int main (int ac, char **av) {
-    (void)av;
-    if (ac != 1)
-        return invalidNumOfArg();
-    t_simulation	*simu = parseStdin();
-    if (!simu)
-        return ERROR;    
-    return 0;
+t_simulation    *parseStdin(void) {
+    t_simulation    *simu = getEmptySimulation();
+    char            *line;
+    while ((line = get_next_line(0))) {
+        ft_putstr(line);
+        
+    }
+    return simu;
 }

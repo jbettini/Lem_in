@@ -6,7 +6,7 @@
 #    By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/21 05:33:19 by jbettini          #+#    #+#              #
-#    Updated: 2024/03/21 05:51:07 by jbettini         ###   ########.fr        #
+#    Updated: 2024/03/21 19:16:01 by jbettini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJ		=	$(SRC:.c=.o)
 
 %.o : %.c
 	@printf  $(TXT_YELLOW)"Compilation du projet : "$(TXT_BLUE)"$<\n"$(FANCY_RESET)
-	@$(CC) $(CFLAGS) -o $@ -c $< > /dev/null 2>&1
+	@$(CC) $(CFLAGS) -o $@ -c $< 
 
 all: $(LIBFT) $(NAME)
 

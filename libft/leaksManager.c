@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   leaksManager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 04:21:39 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/21 19:28:07 by jbettini         ###   ########.fr       */
+/*   Created: 2024/03/21 19:33:04 by jbettini          #+#    #+#             */
+/*   Updated: 2024/03/21 19:47:18 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemIn.h"
+#include "libft.h"
 
-int main (int ac, char **av) {
-    (void)av;
-    if (ac != 1)
-        return invalidNumOfArg();
-    t_simulation	*simu = parseStdin();
-    if (!simu)
-        return ERROR;    
-    return 0;
+
+void    leaksManager(int mode, void *ptr){
+    static  t_list *allPtr;
+    if (mode == ADD) {
+        t_list  *tmp = allPtr;
+        while (tmp) {
+            if (tmp->content == ptr)
+                return ;
+            tmp = tmp->next;
+        }
+        ft_lstadd_back(&allPtr ,ft_lstnew(ptr));
+    }
+    else if (mode == DELETE)
+        ft_lstclear(&allPtr, free);
 }

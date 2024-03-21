@@ -37,6 +37,8 @@ typedef struct s_list
 # define ERROR 1
 # define TRUE 1
 # define FALSE 0
+# define ADD 1
+# define DELETE 0
 
 typedef unsigned long long	t_ull;
 
@@ -121,5 +123,6 @@ void			ft_lstdelone(t_list *lst, void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void*));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*));
+void			leaksManager(int mode, void *ptr);
 
 #endif
