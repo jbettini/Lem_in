@@ -6,7 +6,7 @@
 #    By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/21 05:04:25 by jbettini          #+#    #+#              #
-#    Updated: 2024/03/21 05:49:16 by jbettini         ###   ########.fr        #
+#    Updated: 2024/03/22 23:12:01 by jbettini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ FANCY_RESET = "\033[0m"
 
 %.o: %.c
 	@printf  $(TXT_GREEN)"\rCompilation des fichiers source de la libft : "$(TXT_BLUE)" $<         "$(FANCY_RESET)
-	@${CC} ${CFLAGS} -o $@ -c $< > /dev/null 2>&1
+	@${CC} ${CFLAGS} -o $@ -c $< 
 
 ${NAME}: ${OBJS}
 	@echo $(TXT_GREEN)

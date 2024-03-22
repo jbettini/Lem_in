@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:22:29 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/21 19:29:49 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/22 23:35:34 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,20 @@ typedef struct  s_simulation
 {
     t_graph *graph;
     int     ants;
-    
+    char    **roomsNames;
 }               t_simulation;
 
 //error.c
-int    invalidNumOfArg(void);
+int             invalidNumOfArg(void);
+int             badInputFile(char *badLine);
 
 //parse.c
+bool            isComment(char *str);
+bool            onlyDigitStr(char *str);
 t_simulation    *parseStdin(void);
 
 //init.c
 t_simulation    *getEmptySimulation(void);
+t_graph         *getEmptyGraph(void);
 
 #endif

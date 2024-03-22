@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 04:21:39 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/21 19:28:07 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/22 22:49:55 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int main (int ac, char **av) {
     t_simulation	*simu = parseStdin();
     if (!simu)
         return ERROR;    
+    system("leaks lem-in");
     return 0;
 }

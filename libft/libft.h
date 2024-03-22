@@ -49,7 +49,7 @@ t_ull			ft_itb(int nb);
 void			ft_swap_str(char **a, char **b);
 void			ft_swap_content(t_list **a, t_list **b);
 size_t			ft_double_strlen(char **arg);
-void			ft_free_split(char **tab);
+void			ft_free_strs(char **tab);
 int				ft_bytes_len(int nb);
 void			ft_lstdel_content(void *content);
 int				ft_atoi_base(const char *str, char *base);
@@ -124,5 +124,9 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void*));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*));
 void			leaksManager(int mode, void *ptr);
+int				ft_strequ(char const *s1, char const *s2);
+size_t			ft_strslen(char **str);
+char   	 		**addStrToStrs(char *new, char **src);
+
 
 #endif
