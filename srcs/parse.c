@@ -26,8 +26,8 @@ bool    isComment(char *str){
     return false;
 }
 
-bool    isStart(char *str){
-    if (str[0] == '#' && str[1] == '#' && ft_strlen(str) == 7 && ft_strequ((str + 2), "start"))
+bool    isStart(char *str) {
+    if (ft_strcmp(str, "##start") == 0)
         return true;
     return false;
 }
@@ -38,8 +38,29 @@ bool    isEnd(char *str){
     return false;
 }
 
+bool    isRoom(char *str) {
+    for (int i = 0; str[i]; i++) {
+        if (str[i] != ' ' || !ft_isdigit(str[i]))
+            return false;
+    }
+    return true;
+}
+
+
+bool    isLink(char *str) {
+    if (ft_strchr(str, '-') != 0)
+        return true;
+    return false;
+}
+
 bool    isInstruction(char *str){
     if (str[0] == '#' && str[1] == '#')
+        return true;
+    return false;
+}
+
+bool isNullOrEmpty(char *str) {
+    if (ft_strlen(str) == 0 || (ft_strlen(str) == 1 && str[0] == '\0') || str == NULL)
         return true;
     return false;
 }
@@ -48,28 +69,63 @@ bool    isInstruction(char *str){
 //is Room
 //is link
 
-t_simulation    *parseStdin(void) {
-    t_simulation    *simu = getEmptySimulation();
+t_simulation    *parseStdin(char *filename) {
+    t_simulation    *simu   = getEmptySimulation();
+    int             fd      = open(filename, O_RDONLY);
     char            *line;
-    int             step = 0;
-    while ((line = get_next_line(0))) {
-        if (isComment(line)) {
-            free(line);
-            continue ;
-        }
-        else if (onlyDigitStr(line)){
-            if (step != 0) {
-                // clean simulation
+
+    for (int i = 0; (line = get_next_line(fd)); i++) {
+        
+        if (isNullOrEmpty(line))// Check if the current line is empty or null
+            break;
+
+        if (i == 0) {
+            line[ft_strlen(line) - 1] = '\0';
+            if (onlyDigitStr(line)) {
+                simu->ants = ft_atoi(line);
+            }
+            else {
                 badInputFile(line);
                 free(line);
-                return NULL;
+                exit(1);
             }
-            simu->ants = ft_atoi(line);
-            step++;
+        }
+        else if (isComment(line)) {
+            continue;
+        } else if (isInstruction(line)) {
+            line[ft_strlen(line) - 1] = '\0';
+            if (isStart(line)) {
+                char *nextLine = get_next_line(fd);
+                simu->graph->startRoom = roomConstructor(nextLine, 'S');
+                t_list *room = ft_lstnew(simu->graph->startRoom);
+                ft_lstadd_back(&simu->graph->rooms, room);
+                free(nextLine);
+            } else if (isEnd(line)) {
+                char *nextLine = get_next_line(fd);
+                simu->graph->endRoom = roomConstructor(nextLine, 'E');
+                t_list *room = ft_lstnew(simu->graph->endRoom);
+                ft_lstadd_back(&simu->graph->rooms, room);
+                free(nextLine);
+            }
+            free(line);
+            continue ;
+        } else if (isLink(line)) {
+            line[ft_strlen(line) - 1] = '\0';
+            connectLink(line, &simu->graph->rooms);
+        } else {
+            line[ft_strlen(line) - 1] = '\0';
+            t_room *roomData = roomConstructor(line, 'N');
+            t_list *room = ft_lstnew(roomData);
+            free(roomData);
+            ft_lstadd_back(&simu->graph->rooms, room);
+            simu->graph->numRooms++;
         }
         //is room
         //is link
         free(line);
     }
+    printSimu(simu);
+    printRoom(simu->graph->startRoom);
+    printRoom(simu->graph->endRoom);
     return simu;
 }

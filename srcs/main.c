@@ -14,9 +14,9 @@
 
 int main (int ac, char **av) {
     (void)av;
-    if (ac != 1)
+    if (ac != 2)
         return invalidNumOfArg();
-    t_simulation	*simu = parseStdin();
+    t_simulation	*simu = parseStdin(av[1]);
     if (!simu)
         return ERROR;    
     system("leaks lem-in");

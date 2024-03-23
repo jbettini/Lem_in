@@ -14,12 +14,13 @@
     #define LEM_IN
 
 #include "../libft/libft.h"
+#include <stdio.h>
 
 typedef struct  s_room
 {
 	t_list  *neigh;
     int     posX, posY;
-    bool    isSeen, isEnd;
+    bool    isStart, isEnd;
     char    *name;
 }				t_room;
 
@@ -46,10 +47,20 @@ int             badInputFile(char *badLine);
 //parse.c
 bool            isComment(char *str);
 bool            onlyDigitStr(char *str);
-t_simulation    *parseStdin(void);
+t_simulation    *parseStdin(char *filename);
+void            connectLink(char *str, t_list **head);
 
 //init.c
 t_simulation    *getEmptySimulation(void);
 t_graph         *getEmptyGraph(void);
+t_room          *roomConstructor(char *str, char state);
+
+// Memory Manager
+void            freeTab(char **tab);
+
+// debuger
+void            printSimu(t_simulation *simu);
+void            printRoom(t_room *room);
+
 
 #endif

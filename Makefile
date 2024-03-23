@@ -38,7 +38,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft > /dev/null 2>&1
+	@$(CC) $(CFLAGS) -g -fsanitize=address -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft > /dev/null 2>&1
 
 clean:
 	make -C $(LIBFT_DIR) fclean
