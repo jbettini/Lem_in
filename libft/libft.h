@@ -32,6 +32,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
+	struct s_list	*prev;
 }				t_list;
 
 # ifndef MAX_FD
@@ -124,6 +125,7 @@ void			*ft_calloc(size_t count, size_t size);
 void			ft_strdel(char **as);
 void			ft_swap(int *a, int *b);
 t_list			*ft_lstnew(void *content);
+void 			ft_lst_pop(t_list **head);
 int				ft_lstsize(t_list *lst);
 void			ft_lstadd_front(t_list **alst, t_list *start);
 void			ft_lstadd_back(t_list **alst, t_list *lst);

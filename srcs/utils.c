@@ -159,3 +159,7 @@ bool    lstStrEqu(t_list *lst, char *str) {
     }
     return false;
 }
+
+t_room *Cast(t_list *roomNode) {
+    return roomNode->content;
+}

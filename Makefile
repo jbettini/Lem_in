@@ -14,7 +14,7 @@ CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -g
 RM 			= 	rm -f
 NAME		=	lem-in
-SRC			=	$(wildcard srcs/*.c)
+SRC			=	$(wildcard srcs/*.c) 
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 
@@ -38,8 +38,9 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -g -fsanitize=address -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft > /dev/null 2>&1
+	@$(CC) $(CFLAGS) -g -fsanitize=address -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft > /dev/null 2>&1 
 
+	#-g -fsanitize=address
 clean:
 	make -C $(LIBFT_DIR) fclean
 	@printf  $(TXT_RED)"Nettoyage du projet\n"$(FANCY_RESET)

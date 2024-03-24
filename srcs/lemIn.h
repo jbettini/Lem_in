@@ -22,7 +22,11 @@ typedef struct  s_room
     int     posX, posY;
     bool    isStart, isEnd;
     char    *name;
+    int     isSeen;
+    bool    isInqueue;
 }				t_room;
+
+
 
 typedef struct  s_graph
 {
@@ -38,7 +42,13 @@ typedef struct  s_simulation
     t_graph *graph;
     int     ants;
     t_list  *roomsNames;
+    t_list  **paths;
 }               t_simulation;
+
+
+
+# define NOT_SEEN   0
+# define SEEN       1
 
 //error.c
 int             invalidNumOfArg(void);
@@ -58,6 +68,9 @@ void            handleLink(char *str, t_simulation **simu);
 t_room          *roomConstructor(char *str);
 t_room          *roomCopy(t_room *src);
 
+// algo
+int             pathFinding(t_simulation *simu);
+
 //init.c
 t_simulation    *getEmptySimulation(void);
 t_graph         *getEmptyGraph(void);
@@ -71,22 +84,22 @@ void            printSimu(t_simulation *simu);
 void            printRoom(t_room *room);
 
 // utils
-char	*ft_strdup_except(char *src, char exclude);
-int     numOfOccurences(const char *str, char c);
-char    *ft_strdup_except(char *src, char exclude);
-int     numOfOccurences(const char *str, char c);
-bool    onlyDigitStr(char *str);
-bool    isComment(char *str);
-bool    isStart(char *str);
-bool    isEnd(char *str);
-bool    isRoom(char *str);
-bool    isLink(char *str);
-bool    isInstruction(char *str);
-bool    isNullOrEmpty(char *str);
-bool    nameExist(char *str, t_list *allName);
-bool    nameIsValid(char *str, t_list *allName);
-bool    posIsValid(t_room *r, t_list *allRooms);
-t_room  *getRoomWithName(char *str, t_list **rooms);
-bool    lstStrEqu(t_list *lst, char *str);
-
+char    	    *ft_strdup_except(char *src, char exclude);
+int             numOfOccurences(const char *str, char c);
+char            *ft_strdup_except(char *src, char exclude);
+int             numOfOccurences(const char *str, char c);
+bool            onlyDigitStr(char *str);
+bool            isComment(char *str);
+bool            isStart(char *str);
+bool            isEnd(char *str);
+bool            isRoom(char *str);
+bool            isLink(char *str);
+bool            isInstruction(char *str);
+bool            isNullOrEmpty(char *str);
+bool            nameExist(char *str, t_list *allName);
+bool            nameIsValid(char *str, t_list *allName);
+bool            posIsValid(t_room *r, t_list *allRooms);
+t_room          *getRoomWithName(char *str, t_list **rooms);
+bool            lstStrEqu(t_list *lst, char *str);
+t_room          *Cast(t_list *roomNode);
 #endif

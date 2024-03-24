@@ -38,6 +38,8 @@ t_room *roomConstructor(char *str) {
     newRoom->isEnd = false;
     newRoom->isStart = false;
     newRoom->neigh = NULL;
+    newRoom->isSeen = NOT_SEEN;
+    newRoom->isInqueue = false;
     freeTab(splitArg);
     return newRoom;
 }
@@ -56,8 +58,8 @@ void    handleLink(char *str, t_simulation **simu) {
         handleErrorWithoutStr(fatalError);
     if (lstStrEqu(r1->neigh, r2->name) || lstStrEqu(r2->neigh, r1->name))
         handleErrorWithStr(str, linkAlreadyExists);
-    ft_lstadd_back(&r1->neigh, ft_lstnew(ft_strdup(r2->name)));
-    ft_lstadd_back(&r2->neigh, ft_lstnew(ft_strdup(r1->name)));
+    ft_lstadd_back(&r1->neigh, ft_lstnew(r2));
+    ft_lstadd_back(&r2->neigh, ft_lstnew(r1));
     freeTab(args);
 }
 
@@ -88,14 +90,15 @@ t_simulation    *parseStdin() {
                 bool    validPos = posIsValid(r, simu->graph->rooms);
                 if (validName == false || validPos == false) {
                     free(line);
+                    free(r);
                     handleErrorWithStr(nextLine, badRoomSettings); //Need to clean ALL before exit
                 } else {
                     if (isStart(line) && (!(simu->graph->startRoom))) {
                         r->isStart = true;  
-                        simu->graph->startRoom = roomCopy(r); 
+                        simu->graph->startRoom = r; 
                     } else if (isEnd(line) && (!(simu->graph->endRoom))) {
                         r->isEnd = true;
-                        simu->graph->endRoom = roomCopy(r);
+                        simu->graph->endRoom = r;
                     } else {
                         free(nextLine);
                         handleErrorWithStr(line , badInstruction); //Need to clean ALL before exit

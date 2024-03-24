@@ -30,8 +30,10 @@ void	printDataInt(char *prefix, int data){
 
 void	printNeighbors(t_list	*n){
 	colorPrint(TXT_YELLOW, "Neighbors : ");
+	t_room *tmp = NULL;
 	while (n) {
-		colorPrint(TXT_BLUE, n->content);
+		tmp = (t_room *)n->content;
+		colorPrint(TXT_BLUE, tmp->name);
 		printf(n->next ? " | ": "\n");
 		n = n->next;
 	}
@@ -48,6 +50,10 @@ void	printRoom(t_room *room) {
 		printDataStr("End : ", "true");
 	else
 		printDataStr("End : ", "false");
+	colorPrint(TXT_YELLOW, "isSeen : ");
+	printf("%d\n", room->isSeen);
+	colorPrint(TXT_YELLOW, "isInQueue : ");
+	printf("%d\n", room->isInqueue);
 	colorPrint(TXT_YELLOW, "Position : ");
 	printf("%s X = %d Y = %d%s\n", TXT_BLUE, room->posX, room->posY, FANCY_RESET);
 	printNeighbors(room->neigh);

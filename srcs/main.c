@@ -18,7 +18,9 @@ int main (int ac, char **av) {
         return invalidNumOfArg();
     t_simulation	*simu = parseStdin();
     if (!simu)
-        return ERROR;    
+        return ERROR;
+    printf("Path");
+    pathFinding(simu);
     // system("leaks lem-in");
     return 0;
 }
