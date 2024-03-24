@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:44:47 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/24 04:57:34 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/24 07:55:07 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ void	printDataInt(char *prefix, int data){
 void	printNeighbors(t_list	*n){
 	colorPrint(TXT_YELLOW, "Neighbors : ");
 	while (n) {
-		t_room *tmp = n->content;
-		colorPrint(TXT_BLUE, tmp->name);
+		colorPrint(TXT_BLUE, n->content);
+		printf(n->next ? " | ": "\n");
 		n = n->next;
 	}
-	printf("\n");
 }
 
 void	printRoom(t_room *room) {
@@ -69,5 +68,12 @@ void	printSimu(t_simulation *simu) {
 	colorPrint(TXT_MAGENTA, "Simulation\n----------\n\n");
 	printDataInt("Number of Ants : ", simu->ants);
 	// need to print all room name;
+	t_list *tmp = simu->roomsNames;
+	colorPrint(TXT_YELLOW, "ALL Rooms Names : ");
+	while (tmp){
+		colorPrint(TXT_BLUE ,tmp->content);
+		printf(tmp->next ? " | ": "\n");
+		tmp = tmp->next;
+	}
 	printGraph(simu->graph);
 }

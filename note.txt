@@ -1,0 +1,7 @@
+
+
+
+
+add print roomallroom name in the printers list
+create fun for clean all before exiting
+create fun for check if data is enough
