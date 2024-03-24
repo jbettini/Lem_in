@@ -19,6 +19,15 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
+# define TXT_RED "\033[1;31m"
+# define TXT_GREEN "\033[1;32m"
+# define TXT_YELLOW "\033[1;33m"
+# define TXT_BLUE "\033[1;34m"
+# define TXT_MAGENTA "\033[1;35m"
+# define TXT_CYAN "\033[1;36m"
+# define FANCY_RESET "\033[0m"
+
+
 typedef struct s_list
 {
 	void			*content;

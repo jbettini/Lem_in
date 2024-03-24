@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:22:29 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/22 23:35:34 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/24 03:56:30 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int             badInputFile(char *badLine);
 //parse.c
 bool            isComment(char *str);
 bool            onlyDigitStr(char *str);
-t_simulation    *parseStdin(char *filename);
+t_simulation    *parseStdin();
 void            connectLink(char *str, t_list **head);
 
 //init.c
@@ -61,6 +61,9 @@ void            freeTab(char **tab);
 // debuger
 void            printSimu(t_simulation *simu);
 void            printRoom(t_room *room);
+
+// utils
+char	*ft_strdup_except(char *src, char exclude);
 
 
 #endif

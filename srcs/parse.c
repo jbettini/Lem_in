@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:17:50 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/22 23:31:59 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/24 04:12:58 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,63 +69,61 @@ bool isNullOrEmpty(char *str) {
 //is Room
 //is link
 
-t_simulation    *parseStdin(char *filename) {
+t_simulation    *parseStdin() {
     t_simulation    *simu   = getEmptySimulation();
-    int             fd      = open(filename, O_RDONLY);
     char            *line;
+    int             step = 0;
 
-    for (int i = 0; (line = get_next_line(fd)); i++) {
-        
+    while ((line = get_next_line(0))) {
+        line = ft_strdup_except(line, '\n');
         if (isNullOrEmpty(line))// Check if the current line is empty or null
-            break;
-
-        if (i == 0) {
-            line[ft_strlen(line) - 1] = '\0';
+            break ;
+        if (isComment(line)) {        // skip comment 
+            continue ;
+        } else if (step == 0) {
             if (onlyDigitStr(line)) {
                 simu->ants = ft_atoi(line);
+                step++;
             }
             else {
                 badInputFile(line);
                 free(line);
                 exit(1);
             }
-        }
-        else if (isComment(line)) {
-            continue;
-        } else if (isInstruction(line)) {
-            line[ft_strlen(line) - 1] = '\0';
-            if (isStart(line)) {
-                char *nextLine = get_next_line(fd);
+        } else if (isInstruction(line)) {  
+            t_list *room = NULL;
+            char *nextLine = get_next_line(0);
+            if (isStart(line)) {                                        // Make Start
                 simu->graph->startRoom = roomConstructor(nextLine, 'S');
-                t_list *room = ft_lstnew(simu->graph->startRoom);
-                ft_lstadd_back(&simu->graph->rooms, room);
-                free(nextLine);
-            } else if (isEnd(line)) {
-                char *nextLine = get_next_line(fd);
+                room = ft_lstnew(simu->graph->startRoom);
+            } else if (isEnd(line)) {                                   //Make End
                 simu->graph->endRoom = roomConstructor(nextLine, 'E');
-                t_list *room = ft_lstnew(simu->graph->endRoom);
-                ft_lstadd_back(&simu->graph->rooms, room);
-                free(nextLine);
+                room = ft_lstnew(simu->graph->endRoom);
             }
-            free(line);
-            continue ;
-        } else if (isLink(line)) {
-            line[ft_strlen(line) - 1] = '\0';
-            connectLink(line, &simu->graph->rooms);
-        } else {
-            line[ft_strlen(line) - 1] = '\0';
-            t_room *roomData = roomConstructor(line, 'N');
-            t_list *room = ft_lstnew(roomData);
-            free(roomData);
             ft_lstadd_back(&simu->graph->rooms, room);
-            simu->graph->numRooms++;
+            free(nextLine);
         }
-        //is room
-        //is link
+        
+
+
+
+
+
+
+        
+        //  else if (isLink(line)) {                                  // Make Link
+        //     connectLink(line, &simu->graph->rooms);
+
+        // } //else {
+        //     t_room *roomData = roomConstructor(line, 'N');
+        //     t_list *room = ft_lstnew(roomData);
+        //     free(roomData);
+        //     ft_lstadd_back(&simu->graph->rooms, room);
+        //     simu->graph->numRooms++;
+        // }
         free(line);
     }
+    // check if simu is enought to load
     printSimu(simu);
-    printRoom(simu->graph->startRoom);
-    printRoom(simu->graph->endRoom);
     return simu;
 }
