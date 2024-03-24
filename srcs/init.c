@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:31 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/22 23:36:08 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/24 04:52:19 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ t_simulation    *getEmptySimulation(void) {
     t_simulation    *simu = malloc(sizeof(t_simulation) * 1);
     simu->graph = getEmptyGraph();
     simu->ants = 0;
+    simu->roomsNames = NULL;
     return simu;
 }
 
 t_room *roomConstructor(char *str, char state) {
     char **splitArg = ft_split(str, ' ');
-    t_room *newRoom = malloc(sizeof(t_simulation));
+    t_room *newRoom = malloc(sizeof(t_room));
 
     newRoom->name = ft_strdup(splitArg[0]);
     newRoom->posX = ft_atoi(splitArg[1]);

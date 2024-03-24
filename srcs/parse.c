@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:17:50 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/24 04:12:58 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/24 04:58:57 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,14 @@ bool    isEnd(char *str){
 }
 
 bool    isRoom(char *str) {
-    for (int i = 0; str[i]; i++) {
-        if (str[i] != ' ' || !ft_isdigit(str[i]))
-            return false;
-    }
-    return true;
+    if (numOfOccurences(str, ' ') == 2)
+        return true;
+    return false;
 }
 
 
 bool    isLink(char *str) {
-    if (ft_strchr(str, '-') != 0)
+    if (numOfOccurences(str, '-') == 1)
         return true;
     return false;
 }
@@ -80,10 +78,10 @@ t_simulation    *parseStdin() {
             break ;
         if (isComment(line)) {        // skip comment 
             continue ;
-        } else if (step == 0) {
-            if (onlyDigitStr(line)) {
+        } else if (onlyDigitStr(line)) {
+            if (step == 0) {
                 simu->ants = ft_atoi(line);
-                step++;
+                step = 1;
             }
             else {
                 badInputFile(line);
@@ -91,30 +89,48 @@ t_simulation    *parseStdin() {
                 exit(1);
             }
         } else if (isInstruction(line)) {  
-            t_list *room = NULL;
-            char *nextLine = get_next_line(0);
-            if (isStart(line)) {                                        // Make Start
-                simu->graph->startRoom = roomConstructor(nextLine, 'S');
-                room = ft_lstnew(simu->graph->startRoom);
-            } else if (isEnd(line)) {                                   //Make End
-                simu->graph->endRoom = roomConstructor(nextLine, 'E');
-                room = ft_lstnew(simu->graph->endRoom);
+            if (step == 1) {
+                t_list *room = NULL;
+                char *nextLine = get_next_line(0);
+                if (isStart(line) && (!(simu->graph->startRoom))) {
+                    simu->graph->startRoom = roomConstructor(nextLine, 'S');
+                    room = ft_lstnew(simu->graph->startRoom);
+                    ft_lstadd_back(&simu->roomsNames, ft_lstnew(simu->graph->startRoom->name));
+                } else if (isEnd(line) && (!(simu->graph->endRoom))) {
+                    simu->graph->endRoom = roomConstructor(nextLine, 'E');
+                    room = ft_lstnew(simu->graph->endRoom);
+                    ft_lstadd_back(&simu->roomsNames, ft_lstnew(simu->graph->endRoom->name));
+                } else {
+                    badInstruction(line);
+                    free(line);
+                    free(nextLine);
+                    exit(1); // Need to clean ALL before exit
+                }
+                ft_lstadd_back(&simu->graph->rooms, room);
+                simu->graph->numRooms++;
+                free(nextLine);
+            } else {
+                badInputFile(line);
+                free(line);
+                exit(1);// Need to clean ALL before exit
             }
-            ft_lstadd_back(&simu->graph->rooms, room);
-            free(nextLine);
+        } 
+
+        else if (isRoom(line)) {
+            
         }
+
+
+
+
+
+
+
         
-
-
-
-
-
-
-        
-        //  else if (isLink(line)) {                                  // Make Link
+        // else if (isLink(line)) {                                  // Make Link
         //     connectLink(line, &simu->graph->rooms);
-
-        // } //else {
+        // } 
+        //else {
         //     t_room *roomData = roomConstructor(line, 'N');
         //     t_list *room = ft_lstnew(roomData);
         //     free(roomData);

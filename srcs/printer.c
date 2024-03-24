@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 02:44:47 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/24 03:45:37 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/24 04:57:34 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	printGraph(t_graph *g) {
 void	printSimu(t_simulation *simu) {
 	colorPrint(TXT_MAGENTA, "Simulation\n----------\n\n");
 	printDataInt("Number of Ants : ", simu->ants);
+	// need to print all room name;
 	printGraph(simu->graph);
 }
