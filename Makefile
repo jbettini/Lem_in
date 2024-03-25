@@ -6,7 +6,7 @@
 #    By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/21 05:33:19 by jbettini          #+#    #+#              #
-#    Updated: 2024/03/21 19:16:01 by jbettini         ###   ########.fr        #
+#    Updated: 2024/03/25 01:47:07 by jbettini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -g -fsanitize=address -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft > /dev/null 2>&1 
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft > /dev/null 2>&1 
 
 	#-g -fsanitize=address
 clean:

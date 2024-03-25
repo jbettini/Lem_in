@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:22:29 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/24 08:07:16 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/25 04:17:04 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,14 @@ t_graph         *getEmptyGraph(void);
 void            freeTab(char **tab);
 void            safeFree(void *ptr);
 
-// debuger
-void            printSimu(t_simulation *simu);
-void            printRoom(t_room *room);
+// print.c
+void colorPrint(char *color, char *str);
+void printDataStr(char *prefix, char *data);
+void printDataInt(char *prefix, int data);
+void printNeighbors(t_list *n);
+void printRoom(t_room *room);
+void printGraph(t_graph *g);
+void printSimu(t_simulation *simu);
 
 // utils
 char    	    *ft_strdup_except(char *src, char exclude);

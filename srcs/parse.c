@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:17:50 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/24 08:09:36 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/25 04:20:21 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,5 @@ t_simulation    *parseStdin() {
         free(line);
     }
     // check if simu is enought to load
-    printSimu(simu);
     return simu;
 }

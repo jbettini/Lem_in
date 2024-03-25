@@ -1,24 +1,23 @@
 #include "lemIn.h"
 
-void    printQueue(t_list **queue) {
-    t_list *tmp = *queue;
-    t_room *roomTmp;
-    printf("=============QUEUE===========\nSize of queue : %d\n", ft_lstsize(tmp));
-
-    while (tmp) {
-        roomTmp = (t_room *)tmp->content;
-        // printf("Queue : %s\n", roomTmp->name);
-        printRoom(roomTmp);
-        if (tmp->prev) {
-            t_room *prev = (t_room *)tmp->prev->content;
-            //printf("Prev : %s\n", prev->name);
+void    printQueue(t_list *queue) {
+    printf("=============QUEUE===========\nSize of queue : %d\n", ft_lstsize(queue));
+    t_room  *prevRoom = NULL;
+    while (queue) {
+        if (queue->prev) {
+            prevRoom = (t_room *)queue->prev->content;
+            printDataStr("Previous room : ", prevRoom->name);
         }
-        tmp = tmp->next;
+        else printDataStr("Previous room : ", "NULL");
+
+        printRoom(queue->content);
+
+        queue = queue->next;
     }
     printf("=============================\n");
 }
 
-t_list  *ft_lstnew_prev(void *content, void *prev) {
+t_list  *ft_lstnew_prev(void *content, t_list *prev) {
     	t_list	*li;
 
 	li = malloc(sizeof(t_list));
@@ -30,20 +29,22 @@ t_list  *ft_lstnew_prev(void *content, void *prev) {
 	return (li);
 }
 
-void enqueue(t_room *current, t_list **queue) {
-    t_list *tmp = current->neigh;
-    t_room *roomTmp = NULL;
-
-    printf("Size of neighb : %d\n", ft_lstsize(tmp));
-
-    while (tmp) {
-        roomTmp = (t_room *)tmp->content;
-        if (roomTmp->isSeen == NOT_SEEN && roomTmp->isInqueue == false) {
+bool enqueue(t_room *prevRoom, t_list **queue) {
+    t_list  *neigh = prevRoom->neigh;
+    t_room  *roomTmp = NULL;
+    while (neigh) {
+        roomTmp = (t_room *)neigh->content;
+        if (roomTmp->isEnd == true) {
             roomTmp->isInqueue = true;
-            ft_lstadd_back(queue, ft_lstnew_prev(tmp->content, *queue));
+            ft_lstadd_front(queue, ft_lstnew_prev(roomTmp, ft_lstnew(prevRoom)));
+            return true;
+        } else if (roomTmp->isSeen == NOT_SEEN && roomTmp->isInqueue == false) {
+            roomTmp->isInqueue = true;
+            ft_lstadd_back(queue, ft_lstnew_prev(roomTmp, ft_lstnew(prevRoom)));
         }
-        tmp = tmp->next;
+        neigh = neigh->next;
     }
+    return false;
 }
 
 int pathFinding(t_simulation *simu) {
@@ -52,24 +53,17 @@ int pathFinding(t_simulation *simu) {
 
     simu->graph->startRoom->isSeen = true;
     enqueue(simu->graph->startRoom, &queue);
-
+    printQueue(queue);
 
     while (ft_lstsize(queue) > 0) {
-        printQueue(&queue);
         current = (t_room *)queue->content;
-
         current->isSeen = SEEN;
-
-        if (current == simu->graph->endRoom)
-            break;
-        if (current->isEnd == true) {
+        if (enqueue(current, &queue) == true) {
+            printQueue(queue);
             break ;
         }
-        
-
         ft_lst_pop(&queue);
-        enqueue(current, &queue);
+        printQueue(queue);
     }
-
     return 1;
 }
