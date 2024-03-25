@@ -6,45 +6,45 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:31:37 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/25 08:06:47 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/25 08:19:49 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// void	ft_lstadd_back(t_list **alst, t_list *new)
-// {
-// 	t_list	*li;
-
-// 	li = *alst;
-// 	if (alst)
-// 	{
-// 		if (*alst)
-// 		{
-// 			while (li->next)
-// 				li = li->next;
-// 			if (new)
-// 				new->prev = li;
-// 			li->next = new;
-// 		}
-// 		else {
-// 			*alst = new;
-// 		}
-// 	}
-// }
-
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	t_list	*last;
+	t_list	*li;
 
-	if (!alst || !new)
-		return ;
-	if (!*alst)
+	li = *alst;
+	if (alst)
 	{
-		*alst = new;
-		return ;
+		if (*alst)
+		{
+			while (li->next)
+				li = li->next;
+			if (new)
+				new->prev = li;
+			li->next = new;
+		}
+		else {
+			*alst = new;
+		}
 	}
-	last = ft_lstlast(*alst);
-	last->next = new;
-	new->prev = last;
 }
+
+// void	ft_lstadd_back(t_list **alst, t_list *new)
+// {
+// 	t_list	*last;
+
+// 	if (!alst || !new)
+// 		return ;
+// 	if (!*alst)
+// 	{
+// 		*alst = new;
+// 		return ;
+// 	}
+// 	last = ft_lstlast(*alst);
+// 	last->next = new;
+// 	new->prev = last;
+// }
