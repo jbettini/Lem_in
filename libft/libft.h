@@ -138,6 +138,11 @@ void			leaksManager(int mode, void *ptr);
 int				ft_strequ(char const *s1, char const *s2);
 size_t			ft_strslen(char **str);
 char   	 		**addStrToStrs(char *new, char **src);
+int				ft_lstsize_prev(t_list *lst);
+void			ft_putsendl(char **s);
+void			ft_lstiter_strs(t_list *lst, void (*f)(char **));
+void			noFree(void *null);
+
 
 
 #endif

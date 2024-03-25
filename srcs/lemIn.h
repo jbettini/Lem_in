@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:22:29 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/25 04:17:04 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/25 07:00:19 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ typedef struct  s_room
     bool    isInqueue;
 }				t_room;
 
-
-
 typedef struct  s_graph
 {
     t_list  *rooms;
@@ -42,7 +40,7 @@ typedef struct  s_simulation
     t_graph *graph;
     int     ants;
     t_list  *roomsNames;
-    t_list  **paths;
+    t_list  *paths;
 }               t_simulation;
 
 
@@ -69,7 +67,7 @@ t_room          *roomConstructor(char *str);
 t_room          *roomCopy(t_room *src);
 
 // algo
-int             pathFinding(t_simulation *simu);
+bool             pathFinding(t_simulation *simu);
 
 //init.c
 t_simulation    *getEmptySimulation(void);
@@ -80,13 +78,13 @@ void            freeTab(char **tab);
 void            safeFree(void *ptr);
 
 // print.c
-void colorPrint(char *color, char *str);
-void printDataStr(char *prefix, char *data);
-void printDataInt(char *prefix, int data);
-void printNeighbors(t_list *n);
-void printRoom(t_room *room);
-void printGraph(t_graph *g);
-void printSimu(t_simulation *simu);
+void            colorPrint(char *color, char *str);
+void            printDataStr(char *prefix, char *data);
+void            printDataInt(char *prefix, int data);
+void            printNeighbors(t_list *n);
+void            printRoom(t_room *room);
+void            printGraph(t_graph *g);
+void            printSimu(t_simulation *simu);
 
 // utils
 char    	    *ft_strdup_except(char *src, char exclude);

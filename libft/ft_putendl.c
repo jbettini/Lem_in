@@ -17,3 +17,11 @@ void	ft_putendl(char const *s)
 	ft_putstr(s);
 	ft_putchar('\n');
 }
+
+void	ft_putsendl(char **s)
+{
+	for (int i = 0; s[i]; i++) {
+		ft_putstr(s[i]);
+		ft_putchar('\n');
+	}
+}
