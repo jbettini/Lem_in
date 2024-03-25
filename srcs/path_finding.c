@@ -95,18 +95,20 @@ bool pathFinding(t_simulation *simu) {
 
     simu->graph->startRoom->isSeen = true;
     ft_lstadd_back(&queue, ft_lstnew(simu->graph->startRoom));
+
     while (ft_lstsize(queue) > 0) {
         current = (t_room *)queue->content;
         current->isSeen = SEEN;
-        printQueue(queue);
+        // printQueue(queue);
         if (current->isEnd == true || enqueue(current, &queue) == true ) {
             ret = true;
-            ft_lstadd_back(&simu->paths, ft_lstnew(createPath(queue)));
+            ft_lstadd_back(&simu->paths, ft_lstnew(createPath(queue)));  // work without sanitaze
+            // ft_lstadd_back(&simu->paths, ft_lstnew("SALUT"));        // Mystique La raison de l'echec avec sanitize
+            colorPrint(TXT_RED, "\n\nHEREE\n\n");
             custom_pop(&queue, &poped);
         }
         custom_pop(&queue, &poped);
     }
-    printRQueue(queue);
     ft_lstclear(&queue, noFree);
     ft_lstclear(&poped, noFree);
     return ret;

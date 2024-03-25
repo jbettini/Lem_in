@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 04:21:39 by jbettini          #+#    #+#             */
-/*   Updated: 2024/03/25 06:56:22 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/25 08:03:02 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int main (int ac, char **av) {
     if (!simu)
         return ERROR;
     pathFinding(simu);
-    pathFinding(simu);
-    ft_lstiter_strs(simu->paths, ft_putsendl);
+    // ft_lstiter_strs(simu->paths, ft_putsendl);
     // system("leaks lem-in");
     return 0;
 }

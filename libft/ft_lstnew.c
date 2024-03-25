@@ -6,7 +6,7 @@
 /*   By: jbettini <jbettini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:08:51 by jbettini          #+#    #+#             */
-/*   Updated: 2021/12/11 21:11:44 by jbettini         ###   ########.fr       */
+/*   Updated: 2024/03/25 07:44:12 by jbettini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	li->content = content;
 	li->next = NULL;
+	li->prev = NULL;
 	return (li);
 }
