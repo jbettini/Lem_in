@@ -102,12 +102,11 @@ bool pathFinding(t_simulation *simu) {
         // printQueue(queue);
         if (current->isEnd == true || enqueue(current, &queue) == true ) {
             ret = true;
-            ft_lstadd_back(&simu->paths, ft_lstnew(createPath(queue)));  // work without sanitaze
-            // ft_lstadd_back(&simu->paths, ft_lstnew("SALUT"));        // Mystique La raison de l'echec avec sanitize
-            colorPrint(TXT_RED, "\n\nHEREE\n\n");
+            ft_lstadd_back(&simu->paths, ft_lstnew(createPath(queue)));   // Echec avec sanitize, ne pas add les path issu d'une bifurcation
             custom_pop(&queue, &poped);
+            // break when size de simu->paths = size de endRoom->neigh
         }
-        custom_pop(&queue, &poped);
+        // custom_pop(&queue, &poped);
     }
     ft_lstclear(&queue, noFree);
     ft_lstclear(&poped, noFree);
